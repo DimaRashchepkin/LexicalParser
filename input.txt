@@ -1,0 +1,30 @@
+http://example.com https://google.com ftp://file.net
+http://site.org https://secure.net	http://test.com
+https://api.ru	http://blog.org https://news.com
+http://localhost invalid_url http://192.168.1.1
+https://sub.domain.com	http://path/page.html https://www.site.ru
+httр://pskov.ru (с опечаткой кириллицей)
+http://domain.com https://another.org	http://sample.net
+www.no-protocol.com https://valid.com http://also-valid.ru
+http://	https://
+http://with-port:8080 https://with-path/path
+http://query?param=1 https://fragment#section
+http://underscore_test.org https://dash-ed.com
+http://numbers123.net https://mixed-Test123.org
+http://very.long.subdomain.example.com
+https://another.long.subdomain.test.org
+http://end_with_slash/ https://end_with_slash/
+http:// .com (пробел в URL)
+http://example.com http://test.net
+https://example.org	http://example.edu
+not_a_url просто_текст
+http://кириллица.рф (поддерживается, если анализатор понимает punycode)
+https://example.com:8443
+http://example.com/path?query=string#fragment
+http://example.com:8080/path
+file://local/file
+https:// .com (пробел)
+http://example.com http://test.org
+https://example.com http://another.com
+http://valid.com http://valid.org
+https://valid.net http://valid.io
