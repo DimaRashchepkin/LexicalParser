@@ -7,7 +7,6 @@
     Необходимые функции:
     - main()        управляющая функция: проверяет текущее состояние и полученный символ -> изменяет состояние, выполняет действия
     - add()         добавить символ в лексему
-    - get_char()    сдвинуть указатель на следующий символ
     - lex_out()     вывести полученную лексему
     - clear()       очистить стек символов
 */
@@ -28,8 +27,6 @@ enum condition
     C8,
     C9,
     C10,
-    C11,
-    C12,
     LEX,
     ERR
 } cond = C0;
@@ -77,43 +74,172 @@ int main()
 
                 if (sym == 'h')
                 {
-
+                    add(sym);
+                    sym = getc(input);
+                    cond = C1;
                 }
                 else if (sym == 'f')
                 {
-
+                    add(sym);
+                    sym = getc(input);
+                    cond = C6;
                 }
                 else
                 {
-                    
+                    add(sym);
+                    sym = getc(input);
+                    cond = ERR;
                 }
             }
             case C1:
-                break;
+                if (sym == 't')
+                {
+                    add(sym);
+                    sym = getc(input);
+                    cond = C2;
+                }
+                else
+                {
+                    add(sym);
+                    sym = getc(input);
+                    cond = ERR;
+                }
             case C2:
-                break;
+                if (sym == 't')
+                {
+                    add(sym);
+                    sym = getc(input);
+                    cond = C3;
+                }
+                else
+                {
+                    add(sym);
+                    sym = getc(input);
+                    cond = ERR;
+                }
             case C3:
-                break;
+                if (sym == 'p')
+                {
+                    add(sym);
+                    sym = getc(input);
+                    cond = C4;
+                }
+                else
+                {
+                    add(sym);
+                    sym = getc(input);
+                    cond = ERR;
+                }
             case C4:
-                break;
+                if (sym == ':')
+                {
+                    add(sym);
+                    sym = getc(input);
+                    cond = C8;
+                }
+                else if (sym == 's')
+                {
+                    add(sym);
+                    sym = getc(input);
+                    cond = C7;
+                }
+                else
+                {
+                    add(sym);
+                    sym = getc(input);
+                    cond = ERR;
+                }
             case C5:
-                break;
+                if (sym == 't')
+                {
+                    add(sym);
+                    sym = getc(input);
+                    cond = C6;
+                }
+                else
+                {
+                    add(sym);
+                    sym = getc(input);
+                    cond = ERR;
+                }
             case C6:
-                break;
+                if (sym == 'p')
+                {
+                    add(sym);
+                    sym = getc(input);
+                    cond = C7;
+                }
+                else
+                {
+                    add(sym);
+                    sym = getc(input);
+                    cond = ERR;
+                }
             case C7:
-                break;
+                if (sym == ':')
+                {
+                    add(sym);
+                    sym = getc(input);
+                    cond = C8;
+                }
+                else
+                {
+                    add(sym);
+                    sym = getc(input);
+                    cond = ERR;
+                }
             case C8:
-                break;
+                if (sym == '/')
+                {
+                    add(sym);
+                    sym = getc(input);
+                    cond = C9;
+                }
+                else
+                {
+                    add(sym);
+                    sym = getc(input);
+                    cond = ERR;
+                }
             case C9:
-                break;
+                if (sym == '/')
+                {
+                    add(sym);
+                    sym = getc(input);
+                    cond = C10;
+                }
+                else
+                {
+                    add(sym);
+                    sym = getc(input);
+                    cond = ERR;
+                }
             case C10:
-                break;
-            case C11:
-                break;
-            case C12:
-                break;
+                if (sym != ' ' && sym != '\n' && sym != '\t')
+                {
+                    add(sym);
+                    sym = getc(input);
+                    cond = LEX;
+                }
+                else
+                {
+                    add(sym);
+                    sym = getc(input);
+                    cond = ERR;
+                }
             case LEX:
-                break;
+                if (sym == ' ' && sym == '\n' && sym == '\t')
+                {
+                    lex_out();
+                    clear();
+                    sym = getc(input);
+                    cond = C0;
+                }
+                else
+                {
+                    add(sym);
+                    sym = getc(input);
+                }
             case ERR:
                 break;
         }
