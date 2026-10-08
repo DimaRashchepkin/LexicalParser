@@ -90,6 +90,7 @@ int main()
                     sym = getc(input);
                     cond = ERR;
                 }
+                break;
             }
             case C1:
                 if (sym == 't')
@@ -104,6 +105,7 @@ int main()
                     sym = getc(input);
                     cond = ERR;
                 }
+                break;
             case C2:
                 if (sym == 't')
                 {
@@ -117,6 +119,7 @@ int main()
                     sym = getc(input);
                     cond = ERR;
                 }
+                break;
             case C3:
                 if (sym == 'p')
                 {
@@ -130,6 +133,7 @@ int main()
                     sym = getc(input);
                     cond = ERR;
                 }
+                break;
             case C4:
                 if (sym == ':')
                 {
@@ -149,6 +153,7 @@ int main()
                     sym = getc(input);
                     cond = ERR;
                 }
+                break;
             case C5:
                 if (sym == 't')
                 {
@@ -162,6 +167,7 @@ int main()
                     sym = getc(input);
                     cond = ERR;
                 }
+                break;
             case C6:
                 if (sym == 'p')
                 {
@@ -175,6 +181,7 @@ int main()
                     sym = getc(input);
                     cond = ERR;
                 }
+                break;
             case C7:
                 if (sym == ':')
                 {
@@ -188,6 +195,7 @@ int main()
                     sym = getc(input);
                     cond = ERR;
                 }
+                break;
             case C8:
                 if (sym == '/')
                 {
@@ -201,6 +209,7 @@ int main()
                     sym = getc(input);
                     cond = ERR;
                 }
+                break;
             case C9:
                 if (sym == '/')
                 {
@@ -214,6 +223,7 @@ int main()
                     sym = getc(input);
                     cond = ERR;
                 }
+                break;
             case C10:
                 if (sym != ' ' && sym != '\n' && sym != '\t')
                 {
@@ -227,6 +237,7 @@ int main()
                     sym = getc(input);
                     cond = ERR;
                 }
+                break;
             case LEX:
                 if (sym == ' ' && sym == '\n' && sym == '\t')
                 {
@@ -240,7 +251,19 @@ int main()
                     add(sym);
                     sym = getc(input);
                 }
+                break;
             case ERR:
+            if (sym == ' ' && sym == '\n' && sym == '\t')
+                {
+                    clear();
+                    sym = getc(input);
+                    cond = C0;
+                }
+                else
+                {
+                    add(sym);
+                    sym = getc(input);
+                }
                 break;
         }
     }
