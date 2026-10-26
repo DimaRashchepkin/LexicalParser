@@ -34,31 +34,47 @@ enum condition
 struct stack
 {
     char sym;
-    struct stack * prev;
-} buffer;
+    struct stack * next;
+} *first = NULL, *last = NULL;
 
 void add(char sym)
 {
-    struct stack new;
-    new.sym = sym;
-    new.prev = &buffer;
-    buffer = new;
+    struct stack *new = malloc(sizeof(struct stack));
+    new->sym = sym;
+    new->next = NULL;
+    if (first == NULL)
+    {
+        first = new;
+        last = new;
+    }
+    else
+    {
+        last->next = new;
+        last = new;
+    }
     return;
 }
 
 void clear()
 {
-    struct stack new = {'\0', NULL};
-    buffer = new;
-    return;
+    struct stack *p = first;
+    while (p != NULL)
+    {
+        struct stack *next = p->next;
+        free(p);
+        p = next;
+    }
+    first = NULL;
+    last = NULL;
 }
 
 void lex_out()
 {
-    for(; buffer.prev != NULL; buffer = *buffer.prev)
+    for (struct stack *p = first; p != NULL; p = p->next)
     {
-        printf('%c', buffer.sym);
+        printf("%c", p->sym);
     }
+    printf("\n");
 }
 
 int main()
@@ -71,23 +87,19 @@ int main()
         {
             case C0:
             {
-
                 if (sym == 'h')
                 {
                     add(sym);
-                    sym = getc(input);
                     cond = C1;
                 }
                 else if (sym == 'f')
                 {
                     add(sym);
-                    sym = getc(input);
-                    cond = C6;
+                    cond = C5;
                 }
                 else
                 {
                     add(sym);
-                    sym = getc(input);
                     cond = ERR;
                 }
                 break;
@@ -96,13 +108,11 @@ int main()
                 if (sym == 't')
                 {
                     add(sym);
-                    sym = getc(input);
                     cond = C2;
                 }
                 else
                 {
                     add(sym);
-                    sym = getc(input);
                     cond = ERR;
                 }
                 break;
@@ -110,13 +120,11 @@ int main()
                 if (sym == 't')
                 {
                     add(sym);
-                    sym = getc(input);
                     cond = C3;
                 }
                 else
                 {
                     add(sym);
-                    sym = getc(input);
                     cond = ERR;
                 }
                 break;
@@ -124,13 +132,11 @@ int main()
                 if (sym == 'p')
                 {
                     add(sym);
-                    sym = getc(input);
                     cond = C4;
                 }
                 else
                 {
                     add(sym);
-                    sym = getc(input);
                     cond = ERR;
                 }
                 break;
@@ -138,19 +144,16 @@ int main()
                 if (sym == ':')
                 {
                     add(sym);
-                    sym = getc(input);
                     cond = C8;
                 }
                 else if (sym == 's')
                 {
                     add(sym);
-                    sym = getc(input);
                     cond = C7;
                 }
                 else
                 {
                     add(sym);
-                    sym = getc(input);
                     cond = ERR;
                 }
                 break;
@@ -158,13 +161,11 @@ int main()
                 if (sym == 't')
                 {
                     add(sym);
-                    sym = getc(input);
                     cond = C6;
                 }
                 else
                 {
                     add(sym);
-                    sym = getc(input);
                     cond = ERR;
                 }
                 break;
@@ -172,13 +173,11 @@ int main()
                 if (sym == 'p')
                 {
                     add(sym);
-                    sym = getc(input);
                     cond = C7;
                 }
                 else
                 {
                     add(sym);
-                    sym = getc(input);
                     cond = ERR;
                 }
                 break;
@@ -186,13 +185,11 @@ int main()
                 if (sym == ':')
                 {
                     add(sym);
-                    sym = getc(input);
                     cond = C8;
                 }
                 else
                 {
                     add(sym);
-                    sym = getc(input);
                     cond = ERR;
                 }
                 break;
@@ -200,13 +197,11 @@ int main()
                 if (sym == '/')
                 {
                     add(sym);
-                    sym = getc(input);
                     cond = C9;
                 }
                 else
                 {
                     add(sym);
-                    sym = getc(input);
                     cond = ERR;
                 }
                 break;
@@ -214,13 +209,11 @@ int main()
                 if (sym == '/')
                 {
                     add(sym);
-                    sym = getc(input);
                     cond = C10;
                 }
                 else
                 {
                     add(sym);
-                    sym = getc(input);
                     cond = ERR;
                 }
                 break;
@@ -228,44 +221,43 @@ int main()
                 if (sym != ' ' && sym != '\n' && sym != '\t')
                 {
                     add(sym);
-                    sym = getc(input);
                     cond = LEX;
                 }
                 else
                 {
                     add(sym);
-                    sym = getc(input);
                     cond = ERR;
                 }
                 break;
             case LEX:
-                if (sym == ' ' && sym == '\n' && sym == '\t')
+                if (sym == ' ' || sym == '\n' || sym == '\t')
                 {
                     lex_out();
                     clear();
-                    sym = getc(input);
                     cond = C0;
                 }
                 else
                 {
                     add(sym);
-                    sym = getc(input);
                 }
                 break;
             case ERR:
-            if (sym == ' ' && sym == '\n' && sym == '\t')
+                if (sym == ' ' || sym == '\n' || sym == '\t')
                 {
                     clear();
-                    sym = getc(input);
                     cond = C0;
                 }
                 else
                 {
                     add(sym);
-                    sym = getc(input);
                 }
                 break;
         }
+    }
+    if (cond == LEX)
+    {
+        lex_out();
+        clear();
     }
 
     fclose(input);
