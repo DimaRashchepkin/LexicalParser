@@ -1,30 +1,29 @@
-http://example.com https://google.com ftp://file.net
-http://site.org https://secure.net	http://test.com
-https://api.ru	http://blog.org https://news.com
-http://localhost invalid_url http://192.168.1.1
-https://sub.domain.com	http://path/page.html https://www.site.ru
-httр://pskov.ru (с опечаткой кириллицей)
-http://domain.com https://another.org	http://sample.net
-www.no-protocol.com https://valid.com http://also-valid.ru
-http://	https://
-http://with-port:8080 https://with-path/path
-http://query?param=1 https://fragment#section
-http://underscore_test.org https://dash-ed.com
-http://numbers123.net https://mixed-Test123.org
-http://very.long.subdomain.example.com
-https://another.long.subdomain.test.org
-http://end_with_slash/ https://end_with_slash/
-http:// .com (пробел в URL)
-http://example.com http://test.net
-https://example.org	http://example.edu
-not_a_url просто_текст
-http://кириллица.рф (поддерживается, если анализатор понимает punycode)
-https://example.com:8443
-http://example.com/path?query=string#fragment
-http://example.com:8080/path
-file://local/file
-https:// .com (пробел)
-http://example.com http://test.org
-https://example.com http://another.com
-http://valid.com http://valid.org
-https://valid.net http://valid.io
+https://next.uniyar.ac.ru http://randomsite.net.net.ru.com ftp://files.example.com
+http://example.com	https://google.com	ftp://mirror.linux.org
+https://sub.domain.co.uk http://test.local	ftp://ftp.gnu.org
+http://192.168.1.1 https://api.service.io	ftp://data.gov.ru
+http://path/to/page.html https://site.ru/index.php	ftp://pub/docs/file.zip
+http://query?x=1&y=2 https://frag#top ftp://user@host.com
+http://with-port:8080 https://secure:443 ftp://ftp.example.net:21
+https://very.long.subdomain.example.co.uk http://a.b.c.d.e.f.g.com
+ftp://anonymous@ftp.server.org http://underscore_test.org
+https://dash-ed-domain.com http://123numbers.net https://mixedCase.Org
+http://кириллица.рф https://пример.рф ftp://файлы.рф
+http://end.slash/ https://end.slash/ ftp://end.slash/
+httр://pskov.ru (кириллическая 'р') http:// .com (пробел)
+www.no-scheme.com example.com not_a_url
+htp://typo-scheme.com http:/single-slash.com
+https:// https://	http://
+ftp:// ftp://user@ ftp://:21
+://missing-scheme.com http//no-colon.com https:only-scheme
+file://local/path mailto:user@mail.com tel:+1234567
+http://example http://.com http://-invalid.com
+https://valid.com http://valid.org ftp://valid.net
+http://space in url.com https://tab	inside.com
+http://double..dot.com https://trailing.dot.com.
+ftp://ftp.server.ru http://server.ru ftp://mirror.ru
+https://another.valid.ru http://another.valid.com
+ftp://upload.files.org http://download.files.org
+https://one.more.example.com http://two.more.example.net
+ftp://three.more.example.org http://four.more.example.edu
+https://five.more.example.gov http://six.more.example.io
